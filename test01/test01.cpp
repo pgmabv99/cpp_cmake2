@@ -103,16 +103,16 @@ private:
 		auto b2 = this->minpop(vlc);
 
 		if (nv == npos || nv == nneg) {
-			auto pа = a1 * a2 * a3;
-			return pа;
+			auto xx = a1 * a2 * a3;
+			return xx;
 
 		}
 		else if (nneg >= 2) {
 
 
-			auto pa = a1 * a2 * a3;
-			auto pb = a1 * b1 * b2;
-			return max(pa, pb);
+			auto xx = a1 * a2 * a3;
+			auto yy = a1 * b1 * b2;
+			return max(xx, yy);
 
 
 
