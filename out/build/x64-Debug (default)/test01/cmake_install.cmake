@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/alexe/source/repos/cpp_cmake2/test01
+# Install script for directory: C:/Users/alexe/source/repos/pgmabv99/cpp_cmake2/test01
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Users/alexe/source/repos/cpp_cmake2/out/install/x64-Debug (default)")
+  set(CMAKE_INSTALL_PREFIX "C:/Users/alexe/Source/Repos/pgmabv99/cpp_cmake2/out/install/x64-Debug (default)")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

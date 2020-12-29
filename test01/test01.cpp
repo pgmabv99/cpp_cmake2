@@ -79,7 +79,6 @@ private:
 	}
 
 	int triplets(vector<int>* vl) {
-		//cout << "vl size " << vl->size() <<endl;
 
 		auto npos = 0;
 		auto nneg = 0;
@@ -130,9 +129,9 @@ private:
 	};
 public:
 	void template_test() {
-		auto i_lst = new vector<float>{ 0 };
-		auto c_lst = new vector<char>{ 'a' };
-		auto f_lst = new vector<float>{ 0.1 };
+		auto i_lst = new vector<int>{ 0 ,2};
+		auto c_lst = new vector<char>{ 'a','b' };
+		auto f_lst = new vector<float>{ 0.1, 0.2};
 		auto s_lst = new vector<string>{ "aa","bb" };
 
 		this->print_v(i_lst);
@@ -150,17 +149,20 @@ public:
 		//todo read from json
 
 		elm = new (elm_t);
-		strncpy_s(elm->name, "all pos", IMAX_NAME);
+		memset(elm->name, 0, sizeof(elm->name));
+		strncpy(elm->name, "all pos", IMAX_NAME);
 		elm->val_lst = new vector<int>{ 1, 2, 3, 4, 5 };
 		elm_lst->push_back(elm);
 
 		elm = new (elm_t);
-		strncpy_s(elm->name, "all neg", IMAX_NAME);
+		memset(elm->name, 0, sizeof(elm->name));
+		strncpy(elm->name, "all neg", IMAX_NAME);
 		elm->val_lst = new vector<int>{ -1, -2, -3, -4, -5 };
 		elm_lst->push_back(elm);
 
 		elm = new (elm_t);
-		strncpy_s(elm->name, "mix", IMAX_NAME);
+		memset(elm->name, 0, sizeof(elm->name));
+		strncpy(elm->name, "mix", IMAX_NAME);
 		elm->val_lst = new vector<int>{ -1, -2, -3, 2,3 };
 		elm_lst->push_back(elm);
 

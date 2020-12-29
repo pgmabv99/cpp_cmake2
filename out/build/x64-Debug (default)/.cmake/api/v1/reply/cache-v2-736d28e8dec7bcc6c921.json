@@ -35,7 +35,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/alexe/source/repos/cpp_cmake2/out/build/x64-Debug (default)"
+			"value" : "c:/Users/alexe/source/repos/pgmabv99/cpp_cmake2/out/build/x64-Debug (default)"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -511,7 +511,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/alexe/source/repos/cpp_cmake2"
+			"value" : "C:/Users/alexe/source/repos/pgmabv99/cpp_cmake2"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -523,7 +523,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Users/alexe/source/repos/cpp_cmake2/out/install/x64-Debug (default)"
+			"value" : "C:/Users/alexe/Source/Repos/pgmabv99/cpp_cmake2/out/install/x64-Debug (default)"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -551,7 +551,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/PROGRA~2/MICROS~2/2019/COMMUN~1/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe"
+			"value" : "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
@@ -1047,7 +1047,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/alexe/source/repos/cpp_cmake2/out/build/x64-Debug (default)"
+			"value" : "C:/Users/alexe/source/repos/pgmabv99/cpp_cmake2/out/build/x64-Debug (default)"
 		},
 		{
 			"name" : "cpp_cmake2_SOURCE_DIR",
@@ -1059,31 +1059,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/alexe/source/repos/cpp_cmake2"
-		},
-		{
-			"name" : "test01_BINARY_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "C:/Users/alexe/source/repos/cpp_cmake2/out/build/x64-Debug (default)"
-		},
-		{
-			"name" : "test01_SOURCE_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "C:/Users/alexe/source/repos/cpp_cmake2"
+			"value" : "C:/Users/alexe/source/repos/pgmabv99/cpp_cmake2"
 		}
 	],
 	"kind" : "cache",
