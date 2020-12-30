@@ -49,6 +49,13 @@ public:
 		cout << endl;
 	}
 private:
+#define IMAX_NAME 20
+	struct elm_t {
+		char name[IMAX_NAME + 1];
+		vector<int>* val_lst;
+	};
+
+	typedef list<elm_t*> elm_lst_t;
 	int maxpop(vector<int>* vl) {
 		int mymax = vl->at(0);
 		auto imax = 0;
@@ -122,39 +129,50 @@ private:
 
 	};
 
-#define IMAX_NAME 20
-	struct elm_t {
-		char name[IMAX_NAME + 1];
-		vector<int>* val_lst;
-	};
 
 
-public :
-	void get_json(string str) {
-		// 1. Parse a JSON string into DOM.
+public:
+	elm_lst_t* get_json(string str) {
 
-		//const char* json = "{\"project\":\"rapidjson\",\"stars\":10}";
-		auto json = new char[str.length() + 1];
-		strcpy(json, str.c_str());
+		elm_lst_t* elm_lst=nullptr;
 
 		Document d;
-		d.Parse(json);
+		d.Parse(str.c_str());
 
-		// 2. Modify it by DOM.
-		//Value& s = d["stars"];
-		//s.SetInt(s.GetInt() + 1);
+		auto root = "elm_lst";
+		if (!d.HasMember(root) ){
+			cout << "missing object. exit" << endl;
+			return elm_lst;
+			
+		}
+		const Value& elmjs_lst = d[root];
 
-		// 3. Stringify the DOM
-		StringBuffer buffer;
-		Writer<StringBuffer> writer(buffer);
-		d.Accept(writer);
+		//copy elm list from json
 
-		// Output {"project":"rapidjson","stars":11}
-		std::cout << buffer.GetString() << std::endl;
-	
+		elm_lst = new elm_lst_t;
+
+		for (auto& elmjs : elmjs_lst.GetArray()) {
+			//cout << elmjs["name"].GetString() << endl;
+
+			auto elm = new elm_t;
+			elm->val_lst = new vector<int>;
+			strncpy(elm->name, elmjs["name"].GetString(), IMAX_NAME);
+
+			const Value& valjs_lst = elmjs["val_lst"];
+			for (auto& valjs : valjs_lst.GetArray()) {
+				//cout << valjs.GetInt() << endl;
+				elm->val_lst->push_back(valjs.GetInt());
+
+			}
+			elm_lst->push_back(elm);
+		}
+
+		return elm_lst;
+
 	}
+
+
 	//to do relatvie file 
-	//todo iterate via json array
 	string  get_file() {
 		ifstream file1;
 		string line1;
@@ -163,22 +181,21 @@ public :
 		file1.open(filename1, ios::in);
 		if (file1.is_open()) {
 			while (getline(file1, line1)) {
-				cout << line1 << endl;
 				res = res + line1;
 			};
 			file1.close();
 		}
 		else {
-			cout << "err reading file" <<endl;
+			cout << "err reading file" << endl;
 		};
 		return res;
-	
+
 	}
 public:
 	void template_test() {
-		auto i_lst = new vector<int>{ 0 ,2};
+		auto i_lst = new vector<int>{ 0 ,2 };
 		auto c_lst = new vector<char>{ 'a','b' };
-		auto f_lst = new vector<float>{ 0.1, 0.2};
+		auto f_lst = new vector<float>{ 0.1, 0.2 };
 		auto s_lst = new vector<string>{ "aa","bb" };
 
 		this->print_v(i_lst);
@@ -190,30 +207,14 @@ public:
 	}
 	void triplets_test() {
 		int p;
-		auto elm_lst = new list<elm_t*>;
-		elm_t* elm;
 
-		//todo read from json
+		auto str = this->get_file();
+		auto elm_lst = this->get_json(str);
+		if (elm_lst == nullptr) {
+			return;
+		}
 
-		elm = new (elm_t);
-		memset(elm->name, 0, sizeof(elm->name));
-		strncpy(elm->name, "all pos", IMAX_NAME);
-		elm->val_lst = new vector<int>{ 1, 2, 3, 4, 5 };
-		elm_lst->push_back(elm);
-
-		elm = new (elm_t);
-		memset(elm->name, 0, sizeof(elm->name));
-		strncpy(elm->name, "all neg", IMAX_NAME);
-		elm->val_lst = new vector<int>{ -1, -2, -3, -4, -5 };
-		elm_lst->push_back(elm);
-
-		elm = new (elm_t);
-		memset(elm->name, 0, sizeof(elm->name));
-		strncpy(elm->name, "mix", IMAX_NAME);
-		elm->val_lst = new vector<int>{ -1, -2, -3, 2,3 };
-		elm_lst->push_back(elm);
-
-
+		cout << "---running test" << endl;
 		for (auto elm : *elm_lst) {
 			cout << elm->name << ":";
 			this->print_v(elm->val_lst);
@@ -251,10 +252,8 @@ int main()
 		//ptest1->print_v(vlist);
 
 	test1* ptest1 = new test1();
-	//ptest1->triplets_test();
-	
-	auto str=ptest1->get_file();
-	ptest1->get_json(str);
+	ptest1->triplets_test();
+
 	//ptest1->template_test();
 	return 0;
 }
