@@ -13,4 +13,25 @@
 
 #pragma warning (disable:4996)
 
-// TODO: Reference additional headers your program requires here.
+using namespace std;
+
+class util {
+public:
+
+	template <class T>
+	static void  print_v(vector<T>* vl);
+
+};
+
+template <class T>
+void  util::print_v(vector<T>* vl) {
+	for (auto v : *vl) {
+		cout << v << " ";
+
+	};
+	cout << endl;
+}
+
+
+//todo move cpp tp separe file
+//build threads

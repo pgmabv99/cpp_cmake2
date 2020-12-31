@@ -5,9 +5,8 @@
 using namespace rapidjson;
 
 
-using namespace std;
 
-class test1 {
+class test01 {
 
 
 
@@ -40,14 +39,18 @@ public:
 		return mysum;
 	}
 
-	template <class T>
-	void  print_v(vector<T>* vl) {
-		for (auto v : *vl) {
-			cout << v << " ";
+	void test_arr_vec() {
+		int alist[] = { 1,2,3 ,4,5 };
+		auto* vlist = new vector<int>{ 1, 2, 3, 4, 5 };
 
-		};
-		cout << endl;
+		cout << "Hello test." << endl;
+		auto res = this->test1arr(alist);
+		cout << "res from array " << res << endl;
+		auto resv = this->test1vec(vlist);
+		cout << "res from vector " << resv << endl;
+
 	}
+
 private:
 #define IMAX_NAME 20
 	struct elm_t {
@@ -134,16 +137,16 @@ private:
 public:
 	elm_lst_t* get_json(string str) {
 
-		elm_lst_t* elm_lst=nullptr;
+		elm_lst_t* elm_lst = nullptr;
 
 		Document d;
 		d.Parse(str.c_str());
 
 		auto root = "elm_lst";
-		if (!d.HasMember(root) ){
+		if (!d.HasMember(root)) {
 			cout << "missing object. exit" << endl;
 			return elm_lst;
-			
+
 		}
 		const Value& elmjs_lst = d[root];
 
@@ -198,10 +201,10 @@ public:
 		auto f_lst = new vector<float>{ 0.1, 0.2 };
 		auto s_lst = new vector<string>{ "aa","bb" };
 
-		this->print_v(i_lst);
-		this->print_v(f_lst);
-		this->print_v(c_lst);
-		this->print_v(s_lst);
+		util::print_v(i_lst);
+		util::print_v(f_lst);
+		util::print_v(c_lst);
+		util::print_v(s_lst);
 
 
 	}
@@ -217,7 +220,7 @@ public:
 		cout << "---running test" << endl;
 		for (auto elm : *elm_lst) {
 			cout << elm->name << ":";
-			this->print_v(elm->val_lst);
+			util::print_v(elm->val_lst);
 			p = this->triplets(elm->val_lst);
 			cout << p << endl;
 		}
@@ -234,24 +237,9 @@ public:
 
 int main()
 {
-	//int alist[] = { 1,2,3 ,4,5 };
-	//auto* vlist = new vector<int>{ 1, 2, 3, 4, 5 };
 
 
-	//cout << "Hello test." << endl;
-
-
-
-	//	//auto res = ptest1->test1arr(alist);
-	//	//cout << "res from array " << res << endl;
-	//	//auto resv = ptest1->test1vec(vlist);
-	//	//cout << "res from vector " << resv << endl;
-
-		//auto a1 = ptest1->maxpop(vlist);
-		//cout << " maxpop" << a1 << endl;
-		//ptest1->print_v(vlist);
-
-	test1* ptest1 = new test1();
+	test01* ptest1 = new test01();
 	ptest1->triplets_test();
 
 	//ptest1->template_test();

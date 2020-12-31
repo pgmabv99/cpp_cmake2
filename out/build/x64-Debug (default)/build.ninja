@@ -78,6 +78,20 @@ build test01\CMakeFiles\test01.dir\test01.cpp.obj: CXX_COMPILER__test01_Debug ..
   TARGET_COMPILE_PDB = test01\CMakeFiles\test01.dir\
   TARGET_PDB = test01\test01.pdb
 
+build test01\CMakeFiles\test01.dir\test02_thr.cpp.obj: CXX_COMPILER__test01_Debug ..\..\..\test01\test02_thr.cpp || cmake_object_order_depends_target_test01
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = test01\CMakeFiles\test01.dir
+  OBJECT_FILE_DIR = test01\CMakeFiles\test01.dir
+  TARGET_COMPILE_PDB = test01\CMakeFiles\test01.dir\
+  TARGET_PDB = test01\test01.pdb
+
+build test01\CMakeFiles\test01.dir\util.cpp.obj: CXX_COMPILER__test01_Debug ..\..\..\test01\util.cpp || cmake_object_order_depends_target_test01
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = test01\CMakeFiles\test01.dir
+  OBJECT_FILE_DIR = test01\CMakeFiles\test01.dir
+  TARGET_COMPILE_PDB = test01\CMakeFiles\test01.dir\
+  TARGET_PDB = test01\test01.pdb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target test01
@@ -86,7 +100,7 @@ build test01\CMakeFiles\test01.dir\test01.cpp.obj: CXX_COMPILER__test01_Debug ..
 #############################################
 # Link the executable test01\test01.exe
 
-build test01\test01.exe: CXX_EXECUTABLE_LINKER__test01_Debug test01\CMakeFiles\test01.dir\test01.cpp.obj
+build test01\test01.exe: CXX_EXECUTABLE_LINKER__test01_Debug test01\CMakeFiles\test01.dir\test01.cpp.obj test01\CMakeFiles\test01.dir\test02_thr.cpp.obj test01\CMakeFiles\test01.dir\util.cpp.obj
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
