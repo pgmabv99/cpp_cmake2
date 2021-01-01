@@ -18,14 +18,14 @@
 					"source" : "."
 				},
 				{
-					"build" : "test01",
+					"build" : "main",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.8"
 					},
 					"parentIndex" : 0,
 					"projectIndex" : 0,
-					"source" : "test01",
+					"source" : "main",
 					"targetIndexes" : 
 					[
 						0
@@ -52,8 +52,8 @@
 			[
 				{
 					"directoryIndex" : 1,
-					"id" : "test01::@534f878a60161146212c",
-					"jsonFile" : "target-test01-Debug-8bcd8c8f67b59c4b15a3.json",
+					"id" : "test01::@15c4a824ab2728a3f5e7",
+					"jsonFile" : "target-test01-Debug-c4eb4043053547986ca2.json",
 					"name" : "test01",
 					"projectIndex" : 0
 				}
@@ -63,8 +63,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/azureuser/.vs/cpp_cmake2/ed1eb18e-0a8e-4b8b-805d-d61f5651a986/out/build/Linux-GCC-Debug",
-		"source" : "/home/azureuser/.vs/cpp_cmake2/ed1eb18e-0a8e-4b8b-805d-d61f5651a986/src"
+		"build" : "C:/Users/alexe/source/repos/pgmabv99/cpp_cmake2/out/build/x64-Debug (default)",
+		"source" : "C:/Users/alexe/source/repos/pgmabv99/cpp_cmake2"
 	},
 	"version" : 
 	{

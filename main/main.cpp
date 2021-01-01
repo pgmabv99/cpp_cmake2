@@ -9,7 +9,7 @@ using namespace rapidjson;
 class test01 {
 
 private:
-	util utilp= util();
+	util utilp = util();
 
 public:
 	int test1arr(int* alist) {

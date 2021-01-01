@@ -2,18 +2,28 @@
 #pragma once
 
 #include <iostream>
-#include <filesystem>
+//#include <filesystem>
 
 #include <fstream>
 #include <vector>
 #include <list>
 #include <cstring>  
 #include <string>
+#ifdef _WIN64
 #include "C:\Users\alexe\source\repos\rapidjson\include\rapidjson\document.h"
 #include "C:\Users\alexe\source\repos\rapidjson\include\rapidjson\writer.h"
 #include "C:\Users\alexe\source\repos\rapidjson\include\rapidjson\stringbuffer.h"
+#elif __linux  // WINDOWS
+#include "/home/azureuser/rapidjson/include/rapidjson/document.h"
+#include "/home/azureuser/rapidjson/include/rapidjson/writer.h"
+#include "/home/azureuser/rapidjson/include/rapidjson/stringbuffer.h"
+#endif
 
+#ifdef _WIN64
 #include <direct.h>
+#endif  
+
+
 
 #pragma warning (disable:4996)
 
