@@ -56,6 +56,7 @@ x2sock::x2sock(int n) {
 	pi = nullptr;
 }
 
+
 void x2sock::sock_accept() {
 
 }
