@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "test01/test01.exe"
+			"path" : "main/test01.exe"
 		},
 		{
-			"path" : "test01/test01.pdb"
+			"path" : "main/test01.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -17,7 +17,7 @@
 		],
 		"files" : 
 		[
-			"test01/CMakeLists.txt"
+			"main/CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -27,7 +27,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 7,
+				"line" : 4,
 				"parent" : 0
 			}
 		]
@@ -45,12 +45,12 @@
 			"sourceIndexes" : 
 			[
 				0,
-				2,
-				3
+				1,
+				2
 			]
 		}
 	],
-	"id" : "test01::@534f878a60161146212c",
+	"id" : "test01::@15c4a824ab2728a3f5e7",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -74,8 +74,8 @@
 	"nameOnDisk" : "test01.exe",
 	"paths" : 
 	{
-		"build" : "test01",
-		"source" : "test01"
+		"build" : "main",
+		"source" : "main"
 	},
 	"sourceGroups" : 
 	[
@@ -84,15 +84,8 @@
 			"sourceIndexes" : 
 			[
 				0,
-				2,
-				3
-			]
-		},
-		{
-			"name" : "Header Files",
-			"sourceIndexes" : 
-			[
-				1
+				1,
+				2
 			]
 		}
 	],
@@ -101,24 +94,19 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "test01/test01.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "test01/test01.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "test01/test02_thr.cpp",
+			"path" : "main/main.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "test01/util.cpp",
+			"path" : "main/test02_thr.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "main/util.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

@@ -18,14 +18,14 @@
 					"source" : "."
 				},
 				{
-					"build" : "test01",
+					"build" : "main",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.8"
 					},
 					"parentIndex" : 0,
 					"projectIndex" : 0,
-					"source" : "test01",
+					"source" : "main",
 					"targetIndexes" : 
 					[
 						0
@@ -52,8 +52,8 @@
 			[
 				{
 					"directoryIndex" : 1,
-					"id" : "test01::@534f878a60161146212c",
-					"jsonFile" : "target-test01-Debug-d2b0f0999efacbe54ff7.json",
+					"id" : "test01::@15c4a824ab2728a3f5e7",
+					"jsonFile" : "target-test01-Debug-928f73eb39aaba40751f.json",
 					"name" : "test01",
 					"projectIndex" : 0
 				}

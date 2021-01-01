@@ -1,5 +1,5 @@
-﻿
-#include "test01.h"
+﻿#include "util.h"
+#include "test02_thr.h"
 
 
 using namespace rapidjson;
@@ -8,7 +8,8 @@ using namespace rapidjson;
 
 class test01 {
 
-
+private:
+	util utilp= util();
 
 public:
 	int test1arr(int* alist) {
@@ -180,7 +181,8 @@ public:
 		ifstream file1;
 		string line1;
 		string res;
-		string filename1 = "C:\\Users\\alexe\\source\\repos\\pgmabv99\\cpp_cmake2\\test01\\conf.json";
+		/*string filename1 = "conf.json";*/
+		string filename1 = "C:\\Users\\alexe\\source\\repos\\pgmabv99\\cpp_cmake2\\main\\conf.json";
 		file1.open(filename1, ios::in);
 		if (file1.is_open()) {
 			while (getline(file1, line1)) {
@@ -235,13 +237,19 @@ public:
 	}
 };
 
+
+
+
+
 int main()
 {
-
-
-	test01* ptest1 = new test01();
-	ptest1->triplets_test();
-
+	//todo
+	//cout << "current path " << util::get_current_dir() << endl;
+	//test01* ptest1 = new test01();
+	//ptest1->triplets_test();
 	//ptest1->template_test();
+
+	auto pt = new test02_thr();
+	pt->test02_thr_run();
 	return 0;
 }
