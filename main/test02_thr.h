@@ -9,8 +9,8 @@ class test02_thr {
 
 
 	struct thr_cb {
-		thread* threadp;
-		x2sock* x2sockp;
+		thread* thread_p;
+		x2sock* x2sock_p;
 	};
 
 public:
