@@ -67,7 +67,7 @@ void x2sock::x2accept() {
 }void x2sock::x2connect() {
 
 	x2socki_t* x2socki_p = (x2socki_t*)pi;
-	char  host[11] = "127.0.0.1";
+	char  host[11] = "localhost";
 
 	x2socki_p->connectfd = socket(AF_INET, SOCK_STREAM, 0);
 	cout << " connect socket created " << x2socki_p->connectfd << endl;
@@ -107,7 +107,7 @@ void x2sock::x2write(string buf) {
 	strncpy(x2socki_p->cbuf, buf.c_str(), X2_MAX_LEN);
 	x2socki_p->cbuf_len = strlen(buf.c_str());
 	auto rc=write(x2socki_p->acceptfd, x2socki_p->cbuf, x2socki_p->cbuf_len);
-	cout << "after write " << rc << endl;
+	cout << "rc  after write " << rc << endl;
 	x2socki_p->errno2 = errno;
 	cout << "errno " << strerror(x2socki_p->errno2) << endl;
 
@@ -120,7 +120,7 @@ string x2sock::x2read() {
 	x2socki_t* x2socki_p = (x2socki_t*)pi;
 	memset((void*)x2socki_p->cbuf, 0, X2_MAX_LEN);
 	auto rc=read(x2socki_p->connectfd, x2socki_p->cbuf, X2_MAX_LEN - 1);
-	cout << "after write " << rc << endl;
+	cout << "rc after read " << rc << endl;
 	x2socki_p->errno2 = errno;
 	cout << "errno " << strerror(x2socki_p->errno2) << endl;
 

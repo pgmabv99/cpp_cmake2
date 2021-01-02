@@ -7,7 +7,7 @@
 
 void test02_thr::test02_thr_run() {
 	//to do why static is needed 
-	auto n = 1;
+	auto n = 2;
 	auto thr_cb_list = new list<thr_cb*>;
 
 
