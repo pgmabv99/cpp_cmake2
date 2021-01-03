@@ -7,11 +7,12 @@
 
 void test02_thr::test02_thr_run() {
 	//to do why static is needed 
-	auto n = 2;
+	auto n = 1;
 	auto thr_cb_list = new list<thr_cb*>;
 
 
 	//create N servers
+	cout << "starting servers" << endl;
 	for (auto tid = 0; tid < n; tid++) {
 		auto thr_cb_p = new (thr_cb);
 		thr_cb_p->tid = tid;
@@ -21,10 +22,10 @@ void test02_thr::test02_thr_run() {
 		thr_cb_list->push_back(thr_cb_p);
 	}
 
-	std::this_thread::sleep_for(std::chrono::seconds(10));
-	cout << "starting clients" << endl;
+	std::this_thread::sleep_for(std::chrono::seconds(1));
 
 	// create N client 
+	cout << "starting clients" << endl;
 	for (auto tid = 0; tid < n; tid++) {
 		auto thr_cb_p = new (thr_cb);
 		thr_cb_p->tid = tid;
@@ -32,14 +33,13 @@ void test02_thr::test02_thr_run() {
 		thr_cb_list->push_back(thr_cb_p);
 	}
 
-	//while (true) {
-	//	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::this_thread::sleep_for(std::chrono::seconds(1));
 	//	cout << "parent thread " << std::this_thread::get_id() <<  endl;
-	//}
 
 	for (auto thr_cb_p : *thr_cb_list) {
 		thr_cb_p->thread_p->join();
 	}
+	cout << "ending clients" << endl;
 };
 
 void test02_thr::hello_srv(thr_cb* thr_cb_p) {
@@ -73,10 +73,10 @@ void test02_thr::hello_cln(thr_cb* thr_cb_p) {
 	while (true) {
 		auto buf = thr_cb_p->x2sock_p->x2read();
 		cout << " tid cln receive " << thr_cb_p->tid << " " << buf << endl;
-		if (buf == "fin" || buf=="") break;
+		if (buf == "fin" || buf == "") break;
 	}
 	thr_cb_p->x2sock_p->x2close();
-	if(thr_cb_p->x2sock_p)delete(thr_cb_p->x2sock_p);
+	if (thr_cb_p->x2sock_p)delete(thr_cb_p->x2sock_p);
 };
 
 //todo pipe results to main thread 

@@ -12,6 +12,8 @@ public:
 #define X2_MAX_LEN 4096
 private:
 	void* pi = nullptr;
+	/*void diag(string text);*/
+	void diag(string text, int fd);
 
 
 };
