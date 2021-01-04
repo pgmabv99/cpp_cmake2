@@ -10,7 +10,8 @@ class test02_thr {
 
 	struct thr_cb {
 		thread* thread_p;
-		x2sock* x2sock_p;
+		x2sock* x2sock_p;			//client connect or server listedn
+		x2sock* x2sock_acpt_p;		//server accept   
 		int tid;
 	};
 

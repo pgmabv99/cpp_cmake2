@@ -7,7 +7,7 @@
 
 void test02_thr::test02_thr_run() {
 	//to do why static is needed 
-	auto n = 1;
+	auto n = 2;
 	auto thr_cb_list = new list<thr_cb*>;
 
 
@@ -48,17 +48,22 @@ void test02_thr::hello_srv(thr_cb* thr_cb_p) {
 	auto thr_name = to_string(thr_cb_p->tid);
 
 	thr_cb_p->x2sock_p = new x2sock(port);
-	thr_cb_p->x2sock_p->x2accept();
+	thr_cb_p->x2sock_p->x2listen();
+
+	thr_cb_p->x2sock_acpt_p= thr_cb_p->x2sock_p->x2accept();
 
 	// send nm msg
 	for (int i = 0; i < nm; i++) {
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 		auto buf = " iter  " + to_string(i);
 		cout << "tid srv send " << thr_cb_p->tid << " " << buf << endl;
-		thr_cb_p->x2sock_p->x2write(buf);
+		thr_cb_p->x2sock_acpt_p->x2write(buf);
 	}
+
 	thr_cb_p->x2sock_p->x2close();
-	if (thr_cb_p->x2sock_p)delete(thr_cb_p->x2sock_p);
+	if (thr_cb_p->x2sock_p)delete(thr_cb_p->x2sock_p);	
+	thr_cb_p->x2sock_acpt_p->x2close();
+	if (thr_cb_p->x2sock_acpt_p)delete(thr_cb_p->x2sock_acpt_p);
 };
 
 void test02_thr::hello_cln(thr_cb* thr_cb_p) {
