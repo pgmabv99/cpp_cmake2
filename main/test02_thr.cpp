@@ -7,7 +7,7 @@
 
 void test02_thr::test02_thr_run() {
 	//to do why static is needed 
-	auto n = 2;
+	auto n = 1;
 	auto thr_cb_list = new list<thr_cb*>;
 
 
@@ -47,17 +47,25 @@ void test02_thr::hello_srv(thr_cb* thr_cb_p) {
 	auto port = 8120 + thr_cb_p->tid;
 	auto thr_name = to_string(thr_cb_p->tid);
 
-	thr_cb_p->x2sock_p = new x2sock(port);
-	thr_cb_p->x2sock_p->x2listen();
+	try
+	{
+		thr_cb_p->x2sock_p = new x2sock(port+4);
+		thr_cb_p->x2sock_p->x2listen();
 
-	thr_cb_p->x2sock_acpt_p= thr_cb_p->x2sock_p->x2accept();
+		thr_cb_p->x2sock_acpt_p = thr_cb_p->x2sock_p->x2accept();
 
-	// send nm msg
-	for (int i = 0; i < nm; i++) {
-		std::this_thread::sleep_for(std::chrono::seconds(1));
-		auto buf = " iter  " + to_string(i);
-		cout << "tid srv send " << thr_cb_p->tid << " " << buf << endl;
-		thr_cb_p->x2sock_acpt_p->x2write(buf);
+		// send nm msg
+		for (int i = 0; i < nm; i++) {
+			std::this_thread::sleep_for(std::chrono::seconds(1));
+			auto buf = " iter  " + to_string(i);
+			cout << "tid srv send " << thr_cb_p->tid << " " << buf << endl;
+			thr_cb_p->x2sock_acpt_p->x2write(buf);
+		}
+
+	}
+	catch (x2sock::x2err2_t& x2err2)
+	{
+		cout << "srv exception  caught " << x2err2.code << " " << x2err2.msg << endl;
 	}
 
 	thr_cb_p->x2sock_p->x2close();
@@ -71,14 +79,21 @@ void test02_thr::hello_cln(thr_cb* thr_cb_p) {
 	auto port = 8120 + thr_cb_p->tid;
 	auto thr_name = to_string(thr_cb_p->tid);
 
-	thr_cb_p->x2sock_p = new x2sock(port);
-	thr_cb_p->x2sock_p->x2connect();
+	try
+	{
+		thr_cb_p->x2sock_p = new x2sock(port);
+		thr_cb_p->x2sock_p->x2connect();
 
-	//receive nm msg
-	while (true) {
-		auto buf = thr_cb_p->x2sock_p->x2read();
-		cout << "tid cln receive " << thr_cb_p->tid << " " << buf << endl;
-		if (buf == "fin" || buf == "") break;
+		//receive nm msg
+		while (true) {
+			auto buf = thr_cb_p->x2sock_p->x2read();
+			cout << "tid cln receive " << thr_cb_p->tid << " " << buf << endl;
+			if (buf == "fin" || buf == "") break;
+		}
+	}
+	catch (x2sock::x2err2_t& x2err2)
+	{
+		cout << "cln exception  caught " << x2err2.code <<" "<< x2err2.msg << endl;
 	}
 	thr_cb_p->x2sock_p->x2close();
 	if (thr_cb_p->x2sock_p)delete(thr_cb_p->x2sock_p);

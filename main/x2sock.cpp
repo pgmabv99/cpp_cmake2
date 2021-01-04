@@ -60,6 +60,7 @@ void x2sock::x2listen() {
 
 	x2socki_p->sock_rc = bind(x2socki_p->fd, (struct sockaddr*)&x2socki_p->sockaddr_in, sizeof(x2socki_p->sockaddr_in));
 	x2diag(pi, "bind", x2socki_p->fd);
+
 	x2socki_p->sock_rc = listen(x2socki_p->fd, 10);
 	x2diag(pi, "listen", x2socki_p->fd);
 
@@ -86,19 +87,17 @@ void x2sock::x2connect() {
 	char  host[11] = "localhost";
 
 	x2socki_p->fd = socket(AF_INET, SOCK_STREAM, 0);
-	x2diag(pi,"connectfd socket created ", x2socki_p->fd);
+	x2diag(pi,"socket create  ", x2socki_p->fd);
 
 	memset(&x2socki_p->sockaddr_in, 0, sizeof(sockaddr_in));
 	x2socki_p->sockaddr_in.sin_family = AF_INET;
 	x2socki_p->sockaddr_in.sin_port = htons(x2socki_p->port);
 
-	auto rc = inet_pton(AF_INET, host, &x2socki_p->sockaddr_in.sin_addr);
+	x2socki_p->sock_rc = inet_pton(AF_INET, host, &x2socki_p->sockaddr_in.sin_addr);
 	x2diag(pi,"inet_pton",0);
 
 	x2socki_p->sock_rc = connect(x2socki_p->fd, (struct sockaddr*)&x2socki_p->sockaddr_in, sizeof(x2socki_p->sockaddr_in));
-	x2diag(pi,"socket connectfd connect", x2socki_p->fd);
-
-
+	x2diag(pi,"socket   connect", x2socki_p->fd);
 
 }
 
@@ -115,7 +114,7 @@ void x2sock::x2write(string buf) {
 	strncpy(x2socki_p->cbuf, buf.c_str(), X2_MAX_LEN);
 	x2socki_p->cbuf_len = strlen(buf.c_str());
 	auto rc=write(x2socki_p->fd, x2socki_p->cbuf, x2socki_p->cbuf_len);
-	x2diag(pi,"socket acceptfd write", x2socki_p->fd);
+	x2diag(pi,"socket  write", x2socki_p->fd);
 }
 
 string x2sock::x2read() {
@@ -123,7 +122,7 @@ string x2sock::x2read() {
 
 	memset((void*)x2socki_p->cbuf, 0, X2_MAX_LEN);
 	x2socki_p->sock_rc=read(x2socki_p->fd, x2socki_p->cbuf, X2_MAX_LEN - 1);
-	x2diag(pi,"socket connectfd read", x2socki_p->fd);
+	x2diag(pi,"socket  read", x2socki_p->fd);
 	x2socki_p->buf.assign(x2socki_p->cbuf);
 	return x2socki_p->buf;
 }
@@ -150,6 +149,9 @@ void x2diag(void* pi, string text, int fd) {
 		<< ":rc " + x2socki_p->sock_rc
 		<< ":" + x2socki_p->strerr2
 		<< endl;
+
+	if (x2socki_p->sock_rc != 0) throw  x2sock::x2err2_t(x2sock::X2_FAIL, "  fail " + text + ":" + x2socki_p->strerr2);
+
 }
 
 #else
