@@ -54,7 +54,7 @@ void test02_thr::hello_srv(thr_cb* thr_cb_p) {
 	for (int i = 0; i < nm; i++) {
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 		auto buf = " iter  " + to_string(i);
-		cout << " tid srv send " << thr_cb_p->tid << " " << buf << endl;
+		cout << "tid srv send " << thr_cb_p->tid << " " << buf << endl;
 		thr_cb_p->x2sock_p->x2write(buf);
 	}
 	thr_cb_p->x2sock_p->x2close();
@@ -72,7 +72,7 @@ void test02_thr::hello_cln(thr_cb* thr_cb_p) {
 	//receive nm msg
 	while (true) {
 		auto buf = thr_cb_p->x2sock_p->x2read();
-		cout << " tid cln receive " << thr_cb_p->tid << " " << buf << endl;
+		cout << "tid cln receive " << thr_cb_p->tid << " " << buf << endl;
 		if (buf == "fin" || buf == "") break;
 	}
 	thr_cb_p->x2sock_p->x2close();
