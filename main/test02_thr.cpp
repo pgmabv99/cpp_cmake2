@@ -33,13 +33,13 @@ void test02_thr::test02_thr_run() {
 		thr_cb_list->push_back(thr_cb_p);
 	}
 
-	std::this_thread::sleep_for(std::chrono::seconds(1));
+	//std::this_thread::sleep_for(std::chrono::seconds(1));
 	//	cout << "parent thread " << std::this_thread::get_id() <<  endl;
-
+	cout << "wait for threads to join" <<endl;
 	for (auto thr_cb_p : *thr_cb_list) {
 		thr_cb_p->thread_p->join();
 	}
-	cout << "ending clients" << endl;
+	cout << "threads are joined" << endl;
 };
 
 void test02_thr::hello_srv(thr_cb* thr_cb_p) {

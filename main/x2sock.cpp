@@ -16,6 +16,7 @@
 #include <errno.h>
 #include <arpa/inet.h> 
 
+#define X2_MAX_LEN 4096
 struct x2socki_t {
 	struct sockaddr_in sockaddr_in;
 	int listenfd;
@@ -29,6 +30,9 @@ struct x2socki_t {
 	string  strerr2;	//err text
 	int sock_rc;		//lateset socket call rc
 };
+
+void x2diag(void* pi,string text, int fd);
+
 
 x2sock::x2sock(int port) {
 
@@ -51,7 +55,7 @@ void x2sock::x2accept() {
 	int rc;
 
 	x2socki_p->listenfd = socket(AF_INET, SOCK_STREAM, 0);
-	diag("listenfd socket created ", x2socki_p->listenfd);
+	x2diag(pi,"listenfd socket created ", x2socki_p->listenfd);
 
 	memset(&x2socki_p->sockaddr_in, 0, sizeof(sockaddr_in));
 	x2socki_p->sockaddr_in.sin_family = AF_INET;
@@ -59,13 +63,13 @@ void x2sock::x2accept() {
 	x2socki_p->sockaddr_in.sin_port = htons(x2socki_p->port);
 
 	x2socki_p->sock_rc = bind(x2socki_p->listenfd, (struct sockaddr*)&x2socki_p->sockaddr_in, sizeof(x2socki_p->sockaddr_in));
-	diag("bind", x2socki_p->listenfd);
+	x2diag(pi,"bind", x2socki_p->listenfd);
 	x2socki_p->sock_rc = listen(x2socki_p->listenfd,10);
-	diag("listen", x2socki_p->listenfd);
+	x2diag(pi,"listen", x2socki_p->listenfd);
 
 
 	x2socki_p->acceptfd=accept(x2socki_p->listenfd, (struct sockaddr*)NULL, NULL);
-	diag("accept", x2socki_p->acceptfd);
+	x2diag(pi,"accept", x2socki_p->acceptfd);
 
 }void x2sock::x2connect() {
 
@@ -73,17 +77,17 @@ void x2sock::x2accept() {
 	char  host[11] = "localhost";
 
 	x2socki_p->connectfd = socket(AF_INET, SOCK_STREAM, 0);
-	diag("connectfd socket created ", x2socki_p->connectfd);
+	x2diag(pi,"connectfd socket created ", x2socki_p->connectfd);
 
 	memset(&x2socki_p->sockaddr_in, 0, sizeof(sockaddr_in));
 	x2socki_p->sockaddr_in.sin_family = AF_INET;
 	x2socki_p->sockaddr_in.sin_port = htons(x2socki_p->port);
 
 	auto rc = inet_pton(AF_INET, host, &x2socki_p->sockaddr_in.sin_addr);
-	diag("inet_pton",0);
+	x2diag(pi,"inet_pton",0);
 
 	x2socki_p->sock_rc = connect(x2socki_p->connectfd, (struct sockaddr*)&x2socki_p->sockaddr_in, sizeof(x2socki_p->sockaddr_in));
-	diag("socket connectfd connect", x2socki_p->connectfd);
+	x2diag(pi,"socket connectfd connect", x2socki_p->connectfd);
 
 
 
@@ -104,7 +108,7 @@ void x2sock::x2write(string buf) {
 	strncpy(x2socki_p->cbuf, buf.c_str(), X2_MAX_LEN);
 	x2socki_p->cbuf_len = strlen(buf.c_str());
 	auto rc=write(x2socki_p->acceptfd, x2socki_p->cbuf, x2socki_p->cbuf_len);
-	diag("socket acceptfd write", x2socki_p->acceptfd);
+	x2diag(pi,"socket acceptfd write", x2socki_p->acceptfd);
 }
 
 string x2sock::x2read() {
@@ -112,24 +116,11 @@ string x2sock::x2read() {
 
 	memset((void*)x2socki_p->cbuf, 0, X2_MAX_LEN);
 	x2socki_p->sock_rc=read(x2socki_p->connectfd, x2socki_p->cbuf, X2_MAX_LEN - 1);
-	diag("socket connectfd read", x2socki_p->connectfd);
+	x2diag(pi,"socket connectfd read", x2socki_p->connectfd);
 	x2socki_p->buf.assign(x2socki_p->cbuf);
 	return x2socki_p->buf;
 }
 
-void x2sock::diag(string text, int fd) {
-
-	x2socki_t* x2socki_p = (x2socki_t*)pi;
-	x2socki_p->errno2 = errno;
-	x2socki_p->strerr2.assign(strerror(x2socki_p->errno2));
-	
-	cout << std::this_thread::get_id() 
-		<<" " +text
-		<<":fd "<< fd  
-		<<":rc " + x2socki_p->sock_rc 
-		<<":" + x2socki_p->strerr2
-		<< endl;
-}
 
 
 
@@ -138,6 +129,22 @@ x2sock::~x2sock() {
 	x2socki_t* x2socki_p = (x2socki_t*)pi;
 
 }
+
+
+void x2diag(void* pi, string text, int fd) {
+
+	x2socki_t* x2socki_p = (x2socki_t*)pi;
+	x2socki_p->errno2 = errno;
+	x2socki_p->strerr2.assign(strerror(x2socki_p->errno2));
+
+	cout << std::this_thread::get_id()
+		<< " " + text
+		<< ":fd " << fd
+		<< ":rc " + x2socki_p->sock_rc
+		<< ":" + x2socki_p->strerr2
+		<< endl;
+}
+
 #else
 x2sock::x2sock(int n) {
 	pi = nullptr;
