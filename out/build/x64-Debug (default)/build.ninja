@@ -72,6 +72,7 @@ build rebuild_cache: phony CMakeFiles\rebuild_cache.util
 build cmake_object_order_depends_target_test01: phony || main\CMakeFiles\test01.dir
 
 build main\CMakeFiles\test01.dir\main.cpp.obj: CXX_COMPILER__test01_Debug ..\..\..\main\main.cpp || cmake_object_order_depends_target_test01
+  DEFINES = -DX2_OS_WIN
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   OBJECT_DIR = main\CMakeFiles\test01.dir
   OBJECT_FILE_DIR = main\CMakeFiles\test01.dir
@@ -79,6 +80,7 @@ build main\CMakeFiles\test01.dir\main.cpp.obj: CXX_COMPILER__test01_Debug ..\..\
   TARGET_PDB = main\test01.pdb
 
 build main\CMakeFiles\test01.dir\test02_thr.cpp.obj: CXX_COMPILER__test01_Debug ..\..\..\main\test02_thr.cpp || cmake_object_order_depends_target_test01
+  DEFINES = -DX2_OS_WIN
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   OBJECT_DIR = main\CMakeFiles\test01.dir
   OBJECT_FILE_DIR = main\CMakeFiles\test01.dir
@@ -86,6 +88,7 @@ build main\CMakeFiles\test01.dir\test02_thr.cpp.obj: CXX_COMPILER__test01_Debug 
   TARGET_PDB = main\test01.pdb
 
 build main\CMakeFiles\test01.dir\util.cpp.obj: CXX_COMPILER__test01_Debug ..\..\..\main\util.cpp || cmake_object_order_depends_target_test01
+  DEFINES = -DX2_OS_WIN
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   OBJECT_DIR = main\CMakeFiles\test01.dir
   OBJECT_FILE_DIR = main\CMakeFiles\test01.dir
@@ -93,6 +96,7 @@ build main\CMakeFiles\test01.dir\util.cpp.obj: CXX_COMPILER__test01_Debug ..\..\
   TARGET_PDB = main\test01.pdb
 
 build main\CMakeFiles\test01.dir\x2sock.cpp.obj: CXX_COMPILER__test01_Debug ..\..\..\main\x2sock.cpp || cmake_object_order_depends_target_test01
+  DEFINES = -DX2_OS_WIN
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   OBJECT_DIR = main\CMakeFiles\test01.dir
   OBJECT_FILE_DIR = main\CMakeFiles\test01.dir

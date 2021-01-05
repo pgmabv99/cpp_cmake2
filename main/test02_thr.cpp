@@ -35,7 +35,7 @@ void test02_thr::test02_thr_run() {
 
 	//std::this_thread::sleep_for(std::chrono::seconds(1));
 	//	cout << "parent thread " << std::this_thread::get_id() <<  endl;
-	cout << "wait for threads to join" <<endl;
+	cout << "wait for threads to join" << endl;
 	for (auto thr_cb_p : *thr_cb_list) {
 		thr_cb_p->thread_p->join();
 	}
@@ -49,16 +49,25 @@ void test02_thr::hello_srv(thr_cb* thr_cb_p) {
 
 	try
 	{
-		thr_cb_p->x2sock_p = new x2sock(port+4);
+		thr_cb_p->x2sock_p = new x2sock(port);
 		thr_cb_p->x2sock_p->x2listen();
 
 		thr_cb_p->x2sock_acpt_p = thr_cb_p->x2sock_p->x2accept();
 
 		// send nm msg
-		for (int i = 0; i < nm; i++) {
+		string buf;
+		string msg;
+		for (int i = 0; i < nm + 1; i++) {
 			std::this_thread::sleep_for(std::chrono::seconds(1));
-			auto buf = " iter  " + to_string(i);
-			cout << "tid srv send " << thr_cb_p->tid << " " << buf << endl;
+
+			if (i < nm) {
+				buf = "iter" + to_string(i);
+			}
+			else {
+				buf = "fin";
+			}
+			msg = "tid cln  " + to_string(thr_cb_p->tid) + " send " + buf;
+			cout << msg << endl;
 			thr_cb_p->x2sock_acpt_p->x2write(buf);
 		}
 
@@ -69,7 +78,7 @@ void test02_thr::hello_srv(thr_cb* thr_cb_p) {
 	}
 
 	thr_cb_p->x2sock_p->x2close();
-	if (thr_cb_p->x2sock_p)delete(thr_cb_p->x2sock_p);	
+	if (thr_cb_p->x2sock_p)delete(thr_cb_p->x2sock_p);
 	thr_cb_p->x2sock_acpt_p->x2close();
 	if (thr_cb_p->x2sock_acpt_p)delete(thr_cb_p->x2sock_acpt_p);
 };
@@ -81,19 +90,30 @@ void test02_thr::hello_cln(thr_cb* thr_cb_p) {
 
 	try
 	{
+		//convert thread id to string 
+		stringstream ss1;
+		ss1 << this_thread::get_id();
+		auto file1 ="/home/azureuser/cln_" + ss1.str()+ ".txt";
+
+		fstream fs1;
+		fs1.open(file1, fstream::out);
+
 		thr_cb_p->x2sock_p = new x2sock(port);
 		thr_cb_p->x2sock_p->x2connect();
 
 		//receive nm msg
 		while (true) {
 			auto buf = thr_cb_p->x2sock_p->x2read();
-			cout << "tid cln receive " << thr_cb_p->tid << " " << buf << endl;
+			string msg = "tid cln  " + to_string(thr_cb_p->tid) + " receive " + buf;
+			cout << msg << endl;
+			fs1 << msg << endl;
 			if (buf == "fin" || buf == "") break;
 		}
+		fs1.close();
 	}
 	catch (x2sock::x2err2_t& x2err2)
 	{
-		cout << "cln exception  caught " << x2err2.code <<" "<< x2err2.msg << endl;
+		cout << "cln exception  caught " << x2err2.code << " " << x2err2.msg << endl;
 	}
 	thr_cb_p->x2sock_p->x2close();
 	if (thr_cb_p->x2sock_p)delete(thr_cb_p->x2sock_p);

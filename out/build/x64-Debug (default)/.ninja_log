@@ -30,3 +30,6 @@
 6	948	631246359	main/CMakeFiles/test01.dir/x2sock.cpp.obj	64df79886c88bc9c
 1	949	631246359	main/CMakeFiles/test01.dir/main.cpp.obj	eca56bf239395a0d
 949	1148	631246359	main/test01.exe	c3519ed4447dfd98
+8	992	631569966	main/CMakeFiles/test01.dir/util.cpp.obj	59613c6ffa68859c
+3	1010	631569966	main/CMakeFiles/test01.dir/test02_thr.cpp.obj	e46efe100dae304a
+0	1128	631569967	main/CMakeFiles/test01.dir/main.cpp.obj	650f38de5feda021
