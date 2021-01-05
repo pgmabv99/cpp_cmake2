@@ -200,11 +200,11 @@ public:
 	void template_test() {
 		auto i_lst = new vector<int>{ 0 ,2 };
 		auto c_lst = new vector<char>{ 'a','b' };
-		auto f_lst = new vector<float>{ 0.1, 0.2 };
+		//auto f_lst = new vector<float>{ 0.1, 0.2 };
 		auto s_lst = new vector<string>{ "aa","bb" };
 
 		util::print_v(i_lst);
-		util::print_v(f_lst);
+		//util::print_v(f_lst);
 		util::print_v(c_lst);
 		util::print_v(s_lst);
 

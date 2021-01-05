@@ -4,7 +4,7 @@
 #include <chrono>
 
 
-#ifdef __linux
+#ifdef X2_OS_LINUX
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <netinet/in.h>
@@ -29,14 +29,13 @@ struct x2socki_t {
 	int sock_rc;		//lateset socket call rc
 };
 
-void x2diag(void* pi,string text, int fd);
+void x2diag(void* pi, string text, int fd);
 
 
 x2sock::x2sock(int port) {
 
 	auto x2socki_p = new x2socki_t();
 	pi = (void*)x2socki_p;
-
 	x2socki_p->fd = 0;
 	//get c buffer
 	x2socki_p->cbuf = new char[X2_MAX_LEN];
@@ -75,8 +74,8 @@ x2sock* x2sock::x2accept() {
 	x2sock* x2sock_acpt_p = new x2sock(0);
 	x2socki_t* x2socki_acpt_p = (x2socki_t*)x2sock_acpt_p->pi;
 
-	x2socki_acpt_p->fd=accept(x2socki_p->fd, (struct sockaddr*)NULL, NULL);
-	x2diag(pi,"accept", x2socki_acpt_p->fd);
+	x2socki_acpt_p->fd = accept(x2socki_p->fd, (struct sockaddr*)NULL, NULL);
+	x2diag(pi, "accept", x2socki_acpt_p->fd);
 	return x2sock_acpt_p;
 }
 
@@ -87,17 +86,17 @@ void x2sock::x2connect() {
 	char  host[11] = "localhost";
 
 	x2socki_p->fd = socket(AF_INET, SOCK_STREAM, 0);
-	x2diag(pi,"socket create  ", x2socki_p->fd);
+	x2diag(pi, "socket create  ", x2socki_p->fd);
 
 	memset(&x2socki_p->sockaddr_in, 0, sizeof(sockaddr_in));
 	x2socki_p->sockaddr_in.sin_family = AF_INET;
 	x2socki_p->sockaddr_in.sin_port = htons(x2socki_p->port);
 
 	x2socki_p->sock_rc = inet_pton(AF_INET, host, &x2socki_p->sockaddr_in.sin_addr);
-	x2diag(pi,"inet_pton",0);
+	x2diag(pi, "inet_pton", 0);
 
 	x2socki_p->sock_rc = connect(x2socki_p->fd, (struct sockaddr*)&x2socki_p->sockaddr_in, sizeof(x2socki_p->sockaddr_in));
-	x2diag(pi,"socket   connect", x2socki_p->fd);
+	x2diag(pi, "socket   connect", x2socki_p->fd);
 
 }
 
@@ -113,16 +112,16 @@ void x2sock::x2write(string buf) {
 	memset((void*)x2socki_p->cbuf, 0, X2_MAX_LEN);
 	strncpy(x2socki_p->cbuf, buf.c_str(), X2_MAX_LEN);
 	x2socki_p->cbuf_len = strlen(buf.c_str());
-	auto rc=write(x2socki_p->fd, x2socki_p->cbuf, x2socki_p->cbuf_len);
-	x2diag(pi,"socket  write", x2socki_p->fd);
+	auto rc = write(x2socki_p->fd, x2socki_p->cbuf, x2socki_p->cbuf_len);
+	x2diag(pi, "socket  write", x2socki_p->fd);
 }
 
 string x2sock::x2read() {
 	x2socki_t* x2socki_p = (x2socki_t*)pi;
 
 	memset((void*)x2socki_p->cbuf, 0, X2_MAX_LEN);
-	x2socki_p->sock_rc=read(x2socki_p->fd, x2socki_p->cbuf, X2_MAX_LEN - 1);
-	x2diag(pi,"socket  read", x2socki_p->fd);
+	x2socki_p->sock_rc = read(x2socki_p->fd, x2socki_p->cbuf, X2_MAX_LEN - 1);
+	x2diag(pi, "socket  read", x2socki_p->fd);
 	x2socki_p->buf.assign(x2socki_p->cbuf);
 	return x2socki_p->buf;
 }
@@ -154,20 +153,6 @@ void x2diag(void* pi, string text, int fd) {
 
 }
 
-#else
-x2sock::x2sock(int n) {
-	pi = nullptr;
-}
+#endif // X2_OS_LINUX
 
-
-
-void x2sock::x2accept() {
-
-}
-x2sock::~x2sock() {
-
-	auto x2socki_p = pi;
-
-}
-#endif
 

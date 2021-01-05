@@ -9,11 +9,11 @@
 #include <list>
 #include <cstring>  
 #include <string>
-#ifdef _WIN64
+#ifdef X2_OS_WIN
 #include "C:\Users\alexe\source\repos\rapidjson\include\rapidjson\document.h"
 #include "C:\Users\alexe\source\repos\rapidjson\include\rapidjson\writer.h"
 #include "C:\Users\alexe\source\repos\rapidjson\include\rapidjson\stringbuffer.h"
-#elif __linux  // WINDOWS
+#elif X2_OS_LINUX  
 #include "/home/azureuser/rapidjson/include/rapidjson/document.h"
 #include "/home/azureuser/rapidjson/include/rapidjson/writer.h"
 #include "/home/azureuser/rapidjson/include/rapidjson/stringbuffer.h"

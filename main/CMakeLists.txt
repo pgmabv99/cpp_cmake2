@@ -7,6 +7,9 @@ add_executable (test01
 "util.cpp" 
  "x2sock.cpp" "x2sock.h")
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+add_definitions(-DX2_OS_LINUX)
 target_link_libraries(test01 -lpthread)
+else()
+add_definitions(-DX2_OS_WIN)
 endif()
 
