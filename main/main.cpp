@@ -1,8 +1,9 @@
 ﻿#include "util.h"
 #include "test02_thr.h"
+#include "test.h"
 
 
-using namespace rapidjson;
+
 
 
 
@@ -52,150 +53,6 @@ public:
 
 	}
 
-private:
-#define IMAX_NAME 20
-	struct elm_t {
-		char name[IMAX_NAME + 1];
-		vector<int>* val_lst;
-	};
-
-	typedef list<elm_t*> elm_lst_t;
-	int maxpop(vector<int>* vl) {
-		int mymax = vl->at(0);
-		auto imax = 0;
-
-		for (auto i = 0; i < vl->size(); i++)
-			if (vl->at(i) > mymax) {
-				mymax = vl->at(i);
-				imax = i;
-			};
-
-		vl->erase(vl->begin() + imax);
-		return mymax;
-
-	}
-
-	int minpop(vector<int>* vl) {
-		int mymin = vl->at(0);
-		auto imin = 0;
-
-		for (auto i = 0; i < vl->size(); i++)
-			if (vl->at(i) < mymin) {
-				mymin = vl->at(i);
-				imin = i;
-			};
-
-		vl->erase(vl->begin() + imin);
-		return mymin;
-
-	}
-
-	int triplets(vector<int>* vl) {
-
-		auto npos = 0;
-		auto nneg = 0;
-		auto nv = vl->size();
-		for (auto v : *vl) {
-			if (v >= 0) {
-				npos++;
-			}
-			else {
-				nneg++;
-			};
-		}
-
-		//copy vector
-		auto vlc2 = *vl;
-		auto vlc = &vlc2;
-		auto a1 = this->maxpop(vl);
-		auto a2 = this->maxpop(vl);
-		auto a3 = this->maxpop(vl);
-
-		auto b1 = this->minpop(vlc);
-		auto b2 = this->minpop(vlc);
-
-		if (nv == npos || nv == nneg) {
-			auto xx = a1 * a2 * a3;
-			return xx;
-
-		}
-		else if (nneg >= 2) {
-
-
-			auto xx = a1 * a2 * a3;
-			auto yy = a1 * b1 * b2;
-			return max(xx, yy);
-
-
-
-		};
-		return 0;
-
-	};
-
-
-
-public:
-	elm_lst_t* get_json(string str) {
-
-		elm_lst_t* elm_lst = nullptr;
-
-		Document d;
-		d.Parse(str.c_str());
-
-		auto root = "elm_lst";
-		if (!d.HasMember(root)) {
-			cout << "missing object. exit" << endl;
-			return elm_lst;
-
-		}
-		const Value& elmjs_lst = d[root];
-
-		//copy elm list from json
-
-		elm_lst = new elm_lst_t;
-
-		for (auto& elmjs : elmjs_lst.GetArray()) {
-			//cout << elmjs["name"].GetString() << endl;
-
-			auto elm = new elm_t;
-			elm->val_lst = new vector<int>;
-			strncpy(elm->name, elmjs["name"].GetString(), IMAX_NAME);
-
-			const Value& valjs_lst = elmjs["val_lst"];
-			for (auto& valjs : valjs_lst.GetArray()) {
-				//cout << valjs.GetInt() << endl;
-				elm->val_lst->push_back(valjs.GetInt());
-
-			}
-			elm_lst->push_back(elm);
-		}
-
-		return elm_lst;
-
-	}
-
-
-	//to do relatvie file 
-	string  get_file() {
-		ifstream file1;
-		string line1;
-		string res;
-		/*string filename1 = "conf.json";*/
-		string filename1 = "C:\\Users\\alexe\\source\\repos\\pgmabv99\\cpp_cmake2\\main\\conf.json";
-		file1.open(filename1, ios::in);
-		if (file1.is_open()) {
-			while (getline(file1, line1)) {
-				res = res + line1;
-			};
-			file1.close();
-		}
-		else {
-			cout << "err reading file" << endl;
-		};
-		return res;
-
-	}
 public:
 	void template_test() {
 		auto i_lst = new vector<int>{ 0 ,2 };
@@ -210,46 +67,140 @@ public:
 
 
 	}
-	void triplets_test() {
-		int p;
-
-		auto str = this->get_file();
-		auto elm_lst = this->get_json(str);
-		if (elm_lst == nullptr) {
-			return;
-		}
-
-		cout << "---running test" << endl;
-		for (auto elm : *elm_lst) {
-			cout << elm->name << ":";
-			util::print_v(elm->val_lst);
-			p = this->triplets(elm->val_lst);
-			cout << p << endl;
-		}
-
-
-		for (auto elm : *elm_lst) {
-			delete(elm->val_lst);
-		};
-		delete(elm_lst);
-
-
-	}
 };
 
 
 
 
 
-int main()
-{
+//int main()
+//{
 	//todo
 	//cout << "current path " << util::get_current_dir() << endl;
 	//test01* ptest1 = new test01();
 	//ptest1->triplets_test();
 	//ptest1->template_test();
 
-	auto pt = new test02_thr();
-	pt->test02_thr_run();
-	return 0;
+	//auto pt = new test02_thr();
+	//pt->test02_thr_run();
+
+
+	//cout << " =====derived class" << endl;
+	//test_triplets_t* test_triplets_p = new test_triplets_t();
+	//test_triplets_p->run();
+	//delete(test_triplets_p);
+
+	//cout << " =====base class via base ptr" << endl;
+	//test_t* test_p = new test_t();
+	//test_p->run();
+	//delete(test_p);
+
+	//cout << " =====base class via derived ptr" << endl;
+	//test_t* test_triplets_p2 = new test_triplets_t();
+	//test_triplets_p2->run();
+	//delete(test_triplets_p2);
+
+	//test_arr_dist_t* test_arr_dist_p = new test_arr_dist_t();
+	//test_arr_dist_p->run();
+	//return 0;
+//}
+
+
+void  solution1(vector<int>& a, int pos, int n, int& mymax, int& mysum) {
+
+
+	if (pos == n) {
+		//cout << mysum << " :" << mymax << endl;
+		if (abs(mysum) < mymax) {
+			mymax = abs(mysum);
+			//cout << "selected " << mymax << endl;
+		};
+		return;
+	}
+	else {
+		//try  with +
+		mysum = mysum + a.at(pos);
+		solution1(a, pos + 1, n, mymax, mysum);
+		mysum = mysum - a.at(pos);
+
+		//try  with +
+		mysum = mysum - a.at(pos);
+		solution1(a, pos + 1, n, mymax, mysum);
+		mysum = mysum + a.at(pos);
+	};
+
+}
+
+int solution1a(vector<int>& a) {
+	auto n = a.size();
+	auto pos = 0;
+	int mymax = 20000 * 100;
+	int mysum = 0;
+	solution1(a, pos, n, mymax, mysum);
+	return mymax;
+}
+
+
+#include <stack>
+#include <list>
+#include <vector>
+#include <limits.h>
+
+int solution(vector<int>& a) {
+	int n = a.size();
+	if (n == 0) return 0;
+	auto stk_sum = new stack<int>;
+	auto stk_pos = new stack<int>;
+
+	stk_sum->push(0);
+	stk_pos->push(0);
+	int sum;
+	int pos;
+
+	int  mymax = INT_MAX;
+
+	while (!stk_pos->empty()) {
+
+		pos = stk_pos->top();
+		stk_pos->pop();
+
+		sum = stk_sum->top();
+		stk_sum->pop();
+
+		auto sump = sum + a.at(pos);
+		auto sumn = sum - a.at(pos);
+
+		if (pos == n-1) {
+			if (abs(sump) < mymax) mymax = abs(sump);
+			if (abs(sumn) < mymax) mymax = abs(sumn);
+
+		}
+		else {
+			stk_pos->push(pos + 1);
+			stk_sum->push(sump);
+			stk_pos->push(pos + 1);
+			stk_sum->push(sumn);
+
+		}
+
+
+
+
+
+	}
+
+	return mymax;
+
+}
+
+
+int main() {
+
+	vector<int> a = { };
+	//vector<int> a = { 1,5,2,-2 };
+	//vector<int> a = { 1,5 };
+
+	auto res = solution(a);
+	cout << res << endl;
+
 }

@@ -8,6 +8,7 @@
 #include <sstream>
 #include <vector>
 #include <list>
+#include <stack>
 #include <cstring>  
 #include <string>
 #ifdef X2_OS_WIN
@@ -29,6 +30,7 @@
 #pragma warning (disable:4996)
 
 using namespace std;
+using namespace rapidjson;
 
 
 class util {

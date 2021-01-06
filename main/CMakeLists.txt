@@ -5,7 +5,8 @@ add_executable (test01
 "main.cpp"
 "test02_thr.cpp"
 "util.cpp" 
- "x2sock.cpp" "x2sock.h")
+ "x2sock.cpp" "x2sock.h"
+ "test.h" "test_triplets.cpp"  "test_arr_dist.cpp")
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 add_definitions(-DX2_OS_LINUX)
 target_link_libraries(test01 -lpthread)
