@@ -106,92 +106,7 @@ public:
 //}
 
 
-void  solution_maxabssum1(vector<int>& a, int pos, int n, int& mymax, int& mysum) {
 
-
-	if (pos == n) {
-		//cout << mysum << " :" << mymax << endl;
-		if (abs(mysum) < mymax) {
-			mymax = abs(mysum);
-			//cout << "selected " << mymax << endl;
-		};
-		return;
-	}
-	else {
-		//try  with +
-		mysum = mysum + a.at(pos);
-		solution_maxabssum1(a, pos + 1, n, mymax, mysum);
-		mysum = mysum - a.at(pos);
-
-		//try  with +
-		mysum = mysum - a.at(pos);
-		solution_maxabssum1(a, pos + 1, n, mymax, mysum);
-		mysum = mysum + a.at(pos);
-	};
-
-}
-
-int solution_maxabssum(vector<int>& a) {
-	auto n = a.size();
-	auto pos = 0;
-	int mymax = 20000 * 100;
-	int mysum = 0;
-	solution_maxabssum1(a, pos, n, mymax, mysum);
-	return mymax;
-}
-
-
-#include <stack>
-#include <list>
-#include <vector>
-#include <limits.h>
-
-int solution_maxabssum_stack(vector<int>& a) {
-	int n = a.size();
-	if (n == 0) return 0;
-	auto stk_sum = new stack<int>;
-	auto stk_pos = new stack<int>;
-
-	stk_sum->push(0);
-	stk_pos->push(0);
-	int sum;
-	int pos;
-
-	int  mymax = INT_MAX;
-
-	while (!stk_pos->empty()) {
-
-		pos = stk_pos->top();
-		stk_pos->pop();
-
-		sum = stk_sum->top();
-		stk_sum->pop();
-
-		auto sump = sum + a.at(pos);
-		auto sumn = sum - a.at(pos);
-
-		if (pos == n - 1) {
-			if (abs(sump) < mymax) mymax = abs(sump);
-			if (abs(sumn) < mymax) mymax = abs(sumn);
-
-		}
-		else {
-			stk_pos->push(pos + 1);
-			stk_sum->push(sump);
-			stk_pos->push(pos + 1);
-			stk_sum->push(sumn);
-
-		}
-
-
-
-
-
-	}
-
-	return mymax;
-
-};
 
 
 
@@ -199,7 +114,7 @@ int solution_maxabssum_stack(vector<int>& a) {
 
 list<int>* max_k(vector<int>* in_v, int k) {
 
-	int n = in_v->size();
+	int n = (int) in_v->size();
 
 	list<int>* k_list = new list<int>{};
 	k_list->push_back(INT_MIN);
@@ -239,108 +154,22 @@ list<int>* max_k(vector<int>* in_v, int k) {
 }
 
 
-// ------------tree class
-class node_t {
-public:
-	node_t::node_t(string key);
-	string key;
-	vector<node_t*> children;
-
-};
-
-node_t::node_t(string key) {
-	node_t::key = key;
-}
-
-//-------------node class
-class tree_t {
-public:
-
-
-	tree_t::tree_t();
-	enum direction_t {
-		BCK
-		,FWD
-	};
-	void tree_t::trav(const direction_t direction);
-
-private:
-	node_t* root;
-
-};
-
-
-
-
-tree_t::tree_t() {
-	auto a1 = new node_t("a1");
-	tree_t::root = a1;
-
-	auto b1 = new node_t("b1");
-	a1->children.push_back(b1);
-
-	auto b2 = new node_t("b2");
-	a1->children.push_back(b2);
-
-	auto c11 = new node_t("c11");
-	b1->children.push_back(c11);
-
-	auto c12 = new node_t("c12");
-	b1->children.push_back(c11);
-
-	b2->children.push_back(new node_t("c21"));
-	b2->children.push_back(new node_t("c22"));
-}
-
-void tree_t::trav(direction_t direction) {
-
-	stack<node_t*>* stk = new stack<node_t*>;
-	stk->push(root);
-
-	while (stk->size() > 0) {
-		auto node = stk->top();
-		stk->pop();
-		cout << node->key << endl;
-		switch (direction) {
-		case BCK:
-			for (auto t = node->children.begin(); t != node->children.end(); t++) {
-				stk->push(*t);
-
-			}
-			break;
-		case FWD:
-			for (auto t = node->children.rbegin(); t != node->children.rend(); t++) {
-				stk->push(*t);
-
-			}
-			break;
-		}
-	};
-
-};
-
 
 
 
 int main() {
 
 	//vector<int> a = { };
-	vector<int> a = { 1,5,2,-2,7 };
+	//vector<int> a = { 1,5,2,-2,7 };
 	//vector<int> a = { 1,5 };
 	//util::print_v(&a);
 	//auto res = max_k(&a, 2);
 	//util::print_l(res);
 	//cout << res << endl;
 
-	auto tree_p = new tree_t();
-	cout << "forward" << endl;
-	tree_t::direction_t direction;
-	direction = tree_t::FWD;
-	tree_p->trav(direction);
+	auto test_p = new test_hrt_t();
+	test_p->run();
+	delete(test_p);
 
-	cout << "back" << endl;
-	tree_p->trav(tree_t::BCK);
-
-	delete(tree_p);
 
 }

@@ -9,6 +9,7 @@
 #include <vector>
 #include <list>
 #include <stack>
+#include <map>
 #include <cstring>  
 #include <string>
 #ifdef X2_OS_WIN

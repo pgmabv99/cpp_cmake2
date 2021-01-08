@@ -63,7 +63,10 @@
 				2,
 				3,
 				6,
-				7
+				7,
+				8,
+				9,
+				10
 			]
 		}
 	],
@@ -105,7 +108,10 @@
 				2,
 				3,
 				6,
-				7
+				7,
+				8,
+				9,
+				10
 			]
 		},
 		{
@@ -163,6 +169,24 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "main/test_arr_dist.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "main/test_maxabssum.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "main/test_tree.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "main/test_hrt.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],
