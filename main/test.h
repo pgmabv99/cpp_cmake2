@@ -1,13 +1,17 @@
 #pragma once
 #include "util.h"
+#include <typeinfo>
+
 class test_t {
 
-public :
+public:
 	test_t() {
-		cout << "base construct class test " << endl;
-	};	
+
+		X2_CRT
+
+	};
 	~test_t() {
-		cout << "base destruct class test " << endl;
+		X2_DST
 	};
 	virtual void run() {
 		cout << "base run class test " << endl;
@@ -59,11 +63,21 @@ public:
 private:
 };
 
-// hrt test of 2 int = T
+// hrt test of 2 selected int = T
 class test_hrt_t :public test_t {
 public:
 	test_hrt_t::test_hrt_t() {};
 	test_hrt_t::~test_hrt_t() {};
 	void test_hrt_t::run();
+private:
+};
+
+// find max k elements
+class test_maxk_t :public test_t {
+public:
+	test_maxk_t::test_maxk_t();
+	
+	test_maxk_t::~test_maxk_t();
+	void test_maxk_t::run();
 private:
 };

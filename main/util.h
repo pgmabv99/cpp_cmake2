@@ -67,6 +67,8 @@ void  util::print_l(list<T>* vl) {
 }
 
 
+#define X2_CRT cout << "constructor " << typeid(this).name() << ":"<< this << endl;
+#define X2_DST cout << "destructor " << typeid(this).name() << ":"<< this << endl;
 
 //todo relative file 
 //to do link with get_curr dir fails
