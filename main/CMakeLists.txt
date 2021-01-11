@@ -14,7 +14,7 @@ add_executable (test01
  "test_hrt.cpp" 
  "test_maxk.cpp" 
  "test_uniqptr.cpp" 
- #"test_pimpl.cpp"
+ "test_pimpl.cpp"
  )
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 add_definitions(-DX2_OS_LINUX)

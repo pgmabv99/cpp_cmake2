@@ -19,8 +19,11 @@ public:
 	}
 protected:
 	util utilp = util();
+
+	// pimpl via void *
 	void* pi = nullptr;
 	void* pixp = nullptr;
+
 private:
 
 };
@@ -81,6 +84,8 @@ public:
 	test_maxk_t::~test_maxk_t();
 	void test_maxk_t::run();
 private:
+	class impl_t;
+	unique_ptr<impl_t> impl_p;
 };
 
 // unique_ptr ptr
@@ -91,16 +96,19 @@ public:
 	test_uniqueptr_t::~test_uniqueptr_t();
 	void test_uniqueptr_t::run();
 private:
+
 };
 
 // pimpl ptr
-//class test_pimpl_t :public test_t {
-//public:
-//	test_pimpl_t::test_pimpl_t();
-//	
-//	test_pimpl_t::~test_pimpl_t();
-//	void test_pimpl_t::run();
-//private:
-//	class impl_t;
-//	unique_ptr<impl_t> impl_p;
-//};
+class test_pimpl_t :public test_t {
+public:
+	test_pimpl_t::test_pimpl_t();
+	
+	test_pimpl_t::~test_pimpl_t();
+	void test_pimpl_t::run();
+private:
+	//via pimptl via unique ptr
+	// todo move to base class
+	class impl_t;
+	unique_ptr<impl_t> impl_p;
+};
