@@ -4,17 +4,9 @@
 
 
 
-class junk_t {
-public:
-	junk_t() { X2_CRT };
-	~junk_t() { X2_DST };
-};
 
 struct test_maxki_t {
 	list<int>* k_list;
-	unique_ptr<junk_t> junk_p;
-	shared_ptr<junk_t> junk_p2;
-	shared_ptr<junk_t> junk_p3;
 };
 
 void max_k(test_maxki_t* test_maxki_p, vector<int>* in_v, int k) {
@@ -24,9 +16,6 @@ void max_k(test_maxki_t* test_maxki_p, vector<int>* in_v, int k) {
 	test_maxki_p->k_list = new list<int>{};
 	test_maxki_p->k_list->push_back(INT_MIN);
 
-	test_maxki_p->junk_p.reset(new (junk_t));
-	test_maxki_p->junk_p2.reset(new (junk_t));
-	test_maxki_p->junk_p3 = test_maxki_p->junk_p2;
 
 	for (auto in = 0; in < n; in++) {
 
@@ -66,28 +55,6 @@ test_maxk_t::test_maxk_t() {
 
 	pi  = (void*) new (test_maxki_t);
 
-	if (true)
-	{
-		unique_ptr<junk_t> up = make_unique<junk_t>();
-		cout << "up" << up << endl;
-		unique_ptr<junk_t> up2 = move(up);
-		cout << "up and up2 after move " << up << ":" << up2 << endl;
-		//up2.reset(nullptr);
-
-	}
-	if (true)
-	{
-		shared_ptr<junk_t> sp2 = nullptr;
-		if (true)
-		{
-			shared_ptr<junk_t> sp = make_shared<junk_t>();
-			cout << "sp" << sp << endl;
-			sp2 = sp;
-			sp2.reset();
-			cout << "sp and s2 after copy " << sp << ":" << sp2 << endl;
-		}
-
-	}
 
 
 
@@ -96,8 +63,6 @@ test_maxk_t::test_maxk_t() {
 test_maxk_t::~test_maxk_t() {
 	X2_DST
 		test_maxki_t* test_maxki_p = (test_maxki_t*)pi;
-	test_maxki_p->junk_p.reset(nullptr);
-	cout << "after reset" << endl;
 	delete(test_maxki_p);
 };
 

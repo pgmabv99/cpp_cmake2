@@ -82,3 +82,25 @@ public:
 	void test_maxk_t::run();
 private:
 };
+
+// unique_ptr ptr
+class test_uniqueptr_t :public test_t {
+public:
+	test_uniqueptr_t::test_uniqueptr_t();
+	
+	test_uniqueptr_t::~test_uniqueptr_t();
+	void test_uniqueptr_t::run();
+private:
+};
+
+// pimpl ptr
+//class test_pimpl_t :public test_t {
+//public:
+//	test_pimpl_t::test_pimpl_t();
+//	
+//	test_pimpl_t::~test_pimpl_t();
+//	void test_pimpl_t::run();
+//private:
+//	class impl_t;
+//	unique_ptr<impl_t> impl_p;
+//};
