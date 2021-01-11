@@ -20,6 +20,7 @@ public:
 protected:
 	util utilp = util();
 	void* pi = nullptr;
+	void* pixp = nullptr;
 private:
 
 };
