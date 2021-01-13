@@ -38,7 +38,14 @@ class util {
 public:
 	// print vectors
 	template <class T>
-	static void  print_v(vector<T>* vl);
+	static void  print_v(vector<T>* vl);	
+
+	template <class T>
+	static void  print_col(T&  vl);
+
+
+	template <class T>
+	static void  print_vs(shared_ptr<vector<T>>&  vl);
 
 	template <class T>
 	static void  print_l(list<T>* vl);
@@ -57,6 +64,7 @@ void  util::print_v(vector<T>* vl) {
 	};
 	cout << endl;
 }
+
 template <class T>
 void  util::print_l(list<T>* vl) {
 	for (auto v : *vl) {
@@ -65,6 +73,19 @@ void  util::print_l(list<T>* vl) {
 	};
 	cout << endl;
 }
+
+
+template <class T>
+void  util::print_col(T& vl) {
+	for (auto v : *vl) {
+		cout << v << " ";
+
+	};
+	cout << endl;
+}
+
+
+
 
 
 #define X2_CRT cout << "constructor " << typeid(this).name() << ":"<< this << endl;

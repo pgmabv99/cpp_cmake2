@@ -12,13 +12,13 @@ public:
 		X2_DST;
 	}
 
-	list<int>* k_list =nullptr;
-	void max_k(vector<int>* in_v, int k);
+	list<int>* k_list = nullptr;
+	void max_k(unique_ptr<vector<int>>& in_v, int k);
 
 };
 
 
-void test_maxk_t::impl_t::max_k (vector<int>* in_v, int k) {
+void test_maxk_t::impl_t::max_k(unique_ptr<vector<int>>& in_v, int k) {
 
 	int n = (int)in_v->size();
 
@@ -67,12 +67,18 @@ test_maxk_t::~test_maxk_t() {
 	X2_DST;
 };
 
+
 void test_maxk_t::run() {
 
 
-	vector<int> a = { 1,5,2,-2,7 };
-	util::print_v(&a);
-	impl_p->max_k( &a, 2);
-	util::print_l(impl_p->k_list);
+	auto as = shared_ptr<vector<int>>(new vector<int>{ 1,2,3, -1,-5 });
+	auto au = unique_ptr<vector<int>>(new vector<int>{ 1,2,3, -1,-5 });
+
+	util::print_col(au);
+	util::print_col(as);
+
+
+	impl_p->max_k( au, 2);
+	util::print_col(impl_p->k_list);
 
 };
