@@ -36,53 +36,22 @@ using namespace rapidjson;
 
 class util {
 public:
-	// print vectors
+	// print collection
 	template <class T>
-	static void  print_v(vector<T>* vl);	
+	static void  print_col(T&  vl){
+		for (auto v : *vl) {
+			cout << v << " ";
 
-	template <class T>
-	static void  print_col(T&  vl);
+		};
+		cout << endl;
+	}
+	;
 
-
-	template <class T>
-	static void  print_vs(shared_ptr<vector<T>>&  vl);
-
-	template <class T>
-	static void  print_l(list<T>* vl);
 	//get current folder on win 
 	static std::string get_current_dir();
 
 
 };
-
-//template def must be same file as temp;ate declaration
-template <class T>
-void  util::print_v(vector<T>* vl) {
-	for (auto v : *vl) {
-		cout << v << " ";
-
-	};
-	cout << endl;
-}
-
-template <class T>
-void  util::print_l(list<T>* vl) {
-	for (auto v : *vl) {
-		cout << v << " ";
-
-	};
-	cout << endl;
-}
-
-
-template <class T>
-void  util::print_col(T& vl) {
-	for (auto v : *vl) {
-		cout << v << " ";
-
-	};
-	cout << endl;
-}
 
 
 

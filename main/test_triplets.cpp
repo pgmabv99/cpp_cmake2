@@ -180,7 +180,7 @@ void test_triplets_t::run() {
 	cout << "---running test" << endl;
 	for (auto elm : *elm_lst) {
 		cout << elm->name << ":";
-		util::print_v(elm->val_lst);
+		util::print_col(elm->val_lst);
 		p = test_tripletsi_p->triplets_p->run(elm->val_lst);
 		cout << p << endl;
 	}

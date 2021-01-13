@@ -12,7 +12,7 @@ public:
 		X2_DST;
 	}
 
-	list<int>* k_list = nullptr;
+	unique_ptr<list<int>> k_list = nullptr;
 	void max_k(unique_ptr<vector<int>>& in_v, int k);
 
 };
@@ -45,12 +45,12 @@ void test_maxk_t::impl_t::max_k(unique_ptr<vector<int>>& in_v, int k) {
 			this->k_list->push_back(val);
 		}
 		cout << " before truncate" << endl;
-		util::print_l(this->k_list);
+		util::print_col(this->k_list);
 		//pop front if too long 
 		if (this->k_list->size() > k) {
 			this->k_list->pop_front();
 			cout << " after truncate" << endl;
-			util::print_l(this->k_list);
+			util::print_col(this->k_list);
 		}
 
 
@@ -61,7 +61,7 @@ void test_maxk_t::impl_t::max_k(unique_ptr<vector<int>>& in_v, int k) {
 test_maxk_t::test_maxk_t() {
 	X2_CRT;
 	impl_p = make_unique<impl_t>();
-	impl_p->k_list = new list<int>{};
+	impl_p->k_list = unique_ptr<list<int>>( new list<int>());
 };
 test_maxk_t::~test_maxk_t() {
 	X2_DST;
@@ -80,5 +80,4 @@ void test_maxk_t::run() {
 
 	impl_p->max_k( au, 2);
 	util::print_col(impl_p->k_list);
-
 };
