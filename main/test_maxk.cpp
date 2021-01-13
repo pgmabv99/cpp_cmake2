@@ -80,4 +80,8 @@ void test_maxk_t::run() {
 
 	impl_p->max_k( au, 2);
 	util::print_col(impl_p->k_list);
+
+	for (auto iter = impl_p->k_list->begin(); iter != impl_p->k_list->end(); iter++) {
+		cout << *iter << "  ";
+	};
 };
