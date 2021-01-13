@@ -3,7 +3,7 @@
 #include "test.h"
 
 
-class test_maxk_t::impl_t {
+class test_maxk_t::impl_t{
 public:
 	impl_t() {
 		X2_CRT;
@@ -60,7 +60,7 @@ void test_maxk_t::impl_t::max_k(unique_ptr<vector<int>>& in_v, int k) {
 
 test_maxk_t::test_maxk_t() {
 	X2_CRT;
-	impl_p = make_unique<impl_t>();
+	impl_p = make_unique<test_maxk_t::impl_t>();
 	impl_p->k_list = unique_ptr<list<int>>( new list<int>());
 };
 test_maxk_t::~test_maxk_t() {
