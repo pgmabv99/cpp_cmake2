@@ -15,7 +15,7 @@ add_executable (test01
  "test_maxk.cpp" 
  "test_uniqptr.cpp" 
  "test_pimpl.cpp"
- )
+  "test_lambda.cpp")
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 add_definitions(-DX2_OS_LINUX)
 target_link_libraries(test01 -lpthread)

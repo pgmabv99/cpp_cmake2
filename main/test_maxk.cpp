@@ -20,6 +20,8 @@ public:
 
 void test_maxk_t::impl_t::max_k(unique_ptr<vector<int>>& in_v, int k) {
 
+
+
 	int n = (int)in_v->size();
 
 	this->k_list->push_back(INT_MIN);
@@ -71,6 +73,8 @@ test_maxk_t::~test_maxk_t() {
 void test_maxk_t::run() {
 
 
+	this->sample_public_field++;
+
 	auto as = shared_ptr<vector<int>>(new vector<int>{ 1,2,3, -1,-5 });
 	auto au = unique_ptr<vector<int>>(new vector<int>{ 1,2,3, -1,-5 });
 
@@ -84,4 +88,5 @@ void test_maxk_t::run() {
 	for (auto iter = impl_p->k_list->begin(); iter != impl_p->k_list->end(); iter++) {
 		cout << *iter << "  ";
 	};
+	cout << endl;
 };

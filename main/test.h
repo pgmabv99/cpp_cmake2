@@ -13,10 +13,14 @@ public:
 	~test_t() {
 		X2_DST
 	};
-	virtual void run() {
-		cout << "base run class test " << endl;
+	//virtual void run() {
+	//	cout << "base run class test " << endl;
 
-	}
+	//}	
+	virtual void run() = 0; 
+
+	int sample_public_field;
+
 protected:
 	util utilp = util();
 
@@ -76,17 +80,6 @@ public:
 private:
 };
 
-// find max k elements
-class test_maxk_t :public test_t {
-public:
-	test_maxk_t::test_maxk_t();
-	
-	test_maxk_t::~test_maxk_t();
-	void test_maxk_t::run();
-private:
-	class impl_t;
-	unique_ptr<impl_t> impl_p;
-};
 
 // unique_ptr ptr
 class test_uniqueptr_t :public test_t {
@@ -109,6 +102,30 @@ public:
 private:
 	//via pimptl via unique ptr
 	// todo move to base class
+	class impl_t;
+	unique_ptr<impl_t> impl_p;
+};
+
+// find max k elements
+class test_maxk_t :public test_t {
+public:
+	test_maxk_t::test_maxk_t();
+	
+	test_maxk_t::~test_maxk_t();
+	void test_maxk_t::run();
+private:
+	class impl_t;
+	unique_ptr<impl_t> impl_p;
+};
+
+// test lambda
+class test_lambda_t :public test_t {
+public:
+	test_lambda_t::test_lambda_t();
+	
+	test_lambda_t::~test_lambda_t();
+	void test_lambda_t::run();
+private:
 	class impl_t;
 	unique_ptr<impl_t> impl_p;
 };
