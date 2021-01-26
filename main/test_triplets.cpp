@@ -1,5 +1,6 @@
 #include "util.h"
 #include "test.h"
+#include "util_rapidjsoh.h"
 
 class triplets_t
 {

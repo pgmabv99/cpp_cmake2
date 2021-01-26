@@ -19,7 +19,7 @@ public:
 	//}	
 	virtual void run() = 0; 
 
-	int sample_public_field;
+	int sample_public_field =0;
 
 protected:
 	util utilp = util();

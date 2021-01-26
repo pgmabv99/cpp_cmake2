@@ -7,7 +7,7 @@ add_executable (test01
 "util.cpp" 
  "x2sock.cpp" "x2sock.h"
  "test.h"
- "test_triplets.cpp"  
+ #"test_triplets.cpp"  
  "test_arr_dist.cpp"
  "test_maxabssum.cpp" 
  "test_tree.cpp" 

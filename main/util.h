@@ -12,15 +12,7 @@
 #include <map>
 #include <cstring>  
 #include <string>
-#ifdef X2_OS_WIN
-#include "C:\Users\alexe\source\repos\rapidjson\include\rapidjson\document.h"
-#include "C:\Users\alexe\source\repos\rapidjson\include\rapidjson\writer.h"
-#include "C:\Users\alexe\source\repos\rapidjson\include\rapidjson\stringbuffer.h"
-#elif X2_OS_LINUX  
-#include "/home/azureuser/rapidjson/include/rapidjson/document.h"
-#include "/home/azureuser/rapidjson/include/rapidjson/writer.h"
-#include "/home/azureuser/rapidjson/include/rapidjson/stringbuffer.h"
-#endif
+#include <algorithm>
 
 #ifdef _WIN64
 #include <direct.h>
@@ -31,7 +23,6 @@
 #pragma warning (disable:4996)
 
 using namespace std;
-using namespace rapidjson;
 
 
 class util {
